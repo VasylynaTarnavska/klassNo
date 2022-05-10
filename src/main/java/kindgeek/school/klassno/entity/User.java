@@ -9,7 +9,7 @@ import javax.validation.constraints.Size;
 
 @Getter
 @Setter
-@MappedSuperclass
+@Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class User {
 

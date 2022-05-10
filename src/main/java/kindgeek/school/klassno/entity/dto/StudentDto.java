@@ -16,6 +16,5 @@ public class StudentDto {
 
     private String avatar;
 
-//    private ClassRoom classRoom;
 }
 

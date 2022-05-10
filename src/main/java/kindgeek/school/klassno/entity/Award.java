@@ -19,7 +19,6 @@ public class Award {
     @NotBlank
     private String name;
 
-    @NotBlank
     private String logo;
 
     @OneToMany(mappedBy = "award")

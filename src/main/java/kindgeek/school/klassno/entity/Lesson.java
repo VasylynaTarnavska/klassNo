@@ -39,5 +39,6 @@ public class Lesson {
     @OneToMany(mappedBy = "lesson")
     private List<Attendance> attendances;
 
-
+    @ElementCollection
+    private List<String> files;
 }

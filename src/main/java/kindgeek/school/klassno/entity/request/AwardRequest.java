@@ -12,6 +12,6 @@ public class AwardRequest {
     @NotBlank
     private String name;
 
-    @NotBlank
-    private String logo;
+//    @NotBlank
+//    private String logo;
 }
