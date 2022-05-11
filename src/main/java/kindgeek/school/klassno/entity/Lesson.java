@@ -9,6 +9,7 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -39,6 +40,6 @@ public class Lesson {
     @OneToMany(mappedBy = "lesson")
     private List<Attendance> attendances;
 
-    @ElementCollection
-    private List<String> files;
+    @OneToMany(mappedBy = "lesson")
+    private Set<LessonFile> files;
 }

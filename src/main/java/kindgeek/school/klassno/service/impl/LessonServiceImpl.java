@@ -38,7 +38,7 @@ public class LessonServiceImpl implements LessonService {
     public LessonDto findDtoById(Long id) {
         Lesson lesson = lessonRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Lesson not found"));
-        return toDto(lesson);
+        return lessonMapper.toDto(lesson);
     }
 
     @Override
