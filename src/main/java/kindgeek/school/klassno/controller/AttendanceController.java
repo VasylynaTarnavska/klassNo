@@ -3,16 +3,25 @@ package kindgeek.school.klassno.controller;
 import kindgeek.school.klassno.entity.dto.AttendanceDto;
 import kindgeek.school.klassno.entity.request.AttendanceRequest;
 import kindgeek.school.klassno.service.AttendanceService;
+import kindgeek.school.klassno.service.HomeworkFileStorageService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/attendance")
 public class AttendanceController {
+
     private final AttendanceService attendanceService;
+
+    private final HomeworkFileStorageService homeworkFileStorageService;
 
     @PostMapping
     public void create(@RequestBody AttendanceRequest attendanceRequest){
@@ -38,6 +47,20 @@ public class AttendanceController {
     @DeleteMapping("/delete/{id}")
     public void delete(@PathVariable Long id){
         attendanceService.delete(id);
+    }
+
+    @PostMapping("/{id}/add/files")
+    public void addFiles(@PathVariable Long id, @RequestParam("files") Set<MultipartFile> files){
+        homeworkFileStorageService.saveFiles(files, id);
+    }
+
+    @GetMapping("/{id}/load/files")
+    @ResponseBody
+    public ResponseEntity<Resource> loadFileById(@PathVariable Long id){
+        Resource file = homeworkFileStorageService.loadFileById(id);
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename =\""
+                        + file.getFilename()+ "\"").body(file);
     }
 
 //todo add works with files

@@ -6,6 +6,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -29,4 +30,7 @@ public class Attendance {
 
     @OneToOne(mappedBy = "attendance")
     private Mark mark;
+
+    @OneToMany(mappedBy = "attendance")
+    private Set<HomeworkFile> files;
 }

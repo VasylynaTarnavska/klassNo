@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -20,4 +21,6 @@ public class AttendanceDto {
     private MarkDto mark;
 
     private StudentDto student;
+
+    private Set<HomeworkFileDto> files;
 }
