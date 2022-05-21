@@ -5,10 +5,13 @@ import kindgeek.school.klassno.entity.Teacher;
 import kindgeek.school.klassno.entity.dto.TeacherDto;
 import kindgeek.school.klassno.entity.request.TeacherRequest;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 
 @Mapper(componentModel = "spring")
 public interface TeacherMapper {
+
+    @Mapping(target = "password", ignore = true)
     Teacher toEntity(TeacherRequest teacherRequest);
 
     TeacherDto toDto(Teacher teacher );

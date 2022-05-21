@@ -8,4 +8,6 @@ spring:
   jpa:
     hibernate.ddl-auto: update
     show-sql: true
-
+jwt:
+  secret: klassNosecretjwtsomeSYMbolsAND123123415315141DaasdjahsfkdashfoajfpasfhaofhJ21e31p2rjpiaefapsfjpaekfaoiHfeojsfhzsodfjdsklfjszdof
+  expiration: 30000000

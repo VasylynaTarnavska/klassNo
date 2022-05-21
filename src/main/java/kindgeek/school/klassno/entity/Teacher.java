@@ -13,9 +13,6 @@ import java.util.List;
 @Entity
 public class Teacher extends User{
 
-    @Email
-    private String email;
-
     private String lessonLink;
 
     @OneToMany (mappedBy = "teacher")

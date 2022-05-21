@@ -5,6 +5,7 @@ import kindgeek.school.klassno.entity.Student;
 import kindgeek.school.klassno.entity.dto.StudentDto;
 import kindgeek.school.klassno.entity.request.MarkRequest;
 import kindgeek.school.klassno.entity.request.StudentRequest;
+import kindgeek.school.klassno.enums.UserRole;
 import kindgeek.school.klassno.exception.NotFoundException;
 import kindgeek.school.klassno.mapper.StudentMapper;
 import kindgeek.school.klassno.repository.StudentRepository;
@@ -15,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.management.relation.Role;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,6 +31,7 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public void create(StudentRequest studentRequest) {
         Student student = studentMapper.toEntity(studentRequest);
+        student.setRole(UserRole.STUDENT);
         studentRepository.save(student);
     }
 
