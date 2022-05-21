@@ -18,7 +18,8 @@ public interface StudentMapper {
 
     StudentDto toDto(Student student);
 
-    @Mapping(target = "classRoom", source = "classRoomId")
+    @Mapping(target = "classRoom",  ignore = true)
+    @Mapping(target = "password", ignore = true)
     void update(@MappingTarget Student student, StudentRequest studentRequest);
 
     default Student fromId(Long id){
@@ -33,3 +34,4 @@ public interface StudentMapper {
 
 
 }
+

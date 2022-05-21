@@ -26,4 +26,7 @@ public class Student extends User{
 
     @OneToMany(mappedBy ="student")
     private List<StudentAward> studentAwards;
+
+    @OneToMany(mappedBy = "student")
+    private List<Chat> chats;
 }

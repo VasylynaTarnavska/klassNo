@@ -17,7 +17,7 @@ public interface TeacherService {
 
     void delete(Long id);
 
-    void edit(Long id, TeacherRequest teacherRequest);
+    Long edit(Long id, TeacherRequest teacherRequest);
 
     Page<TeacherDto> find (TeacherCriteria teacherCriteria, Pageable page);
 }

@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface StudentService {
 
-    void create(StudentRequest studentRequest);
+    Long create(StudentRequest studentRequest);
 
     Student findById(Long id);
 
@@ -21,4 +21,6 @@ public interface StudentService {
     void edit(Long id, StudentRequest studentRequest);
 
     Page<StudentDto> findByClassRoomId(Long classRoomId, Pageable page);
+
+    List<Student> findStudentByClassRoomId(Long classRoomId);
 }

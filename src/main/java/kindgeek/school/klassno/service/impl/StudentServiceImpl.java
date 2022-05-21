@@ -5,6 +5,7 @@ import kindgeek.school.klassno.entity.Student;
 import kindgeek.school.klassno.entity.dto.StudentDto;
 import kindgeek.school.klassno.entity.request.MarkRequest;
 import kindgeek.school.klassno.entity.request.StudentRequest;
+import kindgeek.school.klassno.enums.UserRole;
 import kindgeek.school.klassno.exception.NotFoundException;
 import kindgeek.school.klassno.mapper.StudentMapper;
 import kindgeek.school.klassno.repository.StudentRepository;
@@ -12,9 +13,11 @@ import kindgeek.school.klassno.service.StudentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.management.relation.Role;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,10 +29,15 @@ public class StudentServiceImpl implements StudentService {
 
     private final StudentMapper studentMapper;
 
+    private final PasswordEncoder passwordEncoder;
+
     @Override
-    public void create(StudentRequest studentRequest) {
+    public Long create(StudentRequest studentRequest) {
         Student student = studentMapper.toEntity(studentRequest);
+        student.setRole(UserRole.STUDENT);
+        student.setPassword(passwordEncoder.encode(studentRequest.getPassword()));
         studentRepository.save(student);
+        return student.getId();
     }
 
     @Override
@@ -61,6 +69,11 @@ public class StudentServiceImpl implements StudentService {
     public Page<StudentDto> findByClassRoomId(Long classRoomId, Pageable page){
         Page<Student> students = studentRepository.findByClassRoomId(classRoomId, page);
         return students.map(studentMapper::toDto);
+    }
+
+    @Override
+    public List<Student> findStudentByClassRoomId(Long classRoomId){
+        return studentRepository.findStudentByClassRoomId(classRoomId);
     }
 
 

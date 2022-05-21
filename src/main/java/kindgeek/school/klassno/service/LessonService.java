@@ -14,11 +14,13 @@ public interface LessonService {
 
     Lesson findById(Long id);
 
-    void create(LessonRequest lessonRequest);
+    Long create(LessonRequest lessonRequest);
 
     void delete(Long id);
 
     void edit(Long id, LessonRequest lessonRequest);
 
     Page<LessonDto> find(LessonCriteria lessonCriteria, Pageable page);
+
+    Page<LessonDto> findLessonByStudentId(Long studentId, Pageable page);
 }

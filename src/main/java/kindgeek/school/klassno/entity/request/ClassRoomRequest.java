@@ -12,4 +12,7 @@ public class ClassRoomRequest {
 
     @NotBlank
     private String grade;
+
+    @NotBlank
+    private String className;
 }

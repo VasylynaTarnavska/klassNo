@@ -1,6 +1,7 @@
 package kindgeek.school.klassno.service;
 
 import kindgeek.school.klassno.entity.Attendance;
+import kindgeek.school.klassno.entity.Lesson;
 import kindgeek.school.klassno.entity.dto.AttendanceDto;
 import kindgeek.school.klassno.entity.request.AttendanceRequest;
 
@@ -8,6 +9,8 @@ import java.util.List;
 
 public interface AttendanceService {
     void create(AttendanceRequest attendanceRequest);
+
+    void createFromLesson(Lesson lesson);
 
     AttendanceDto findDtoById(Long id);
 

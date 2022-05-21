@@ -15,9 +15,13 @@ public class LessonDto {
 
     private LocalDateTime lessonTime;
 
+    private String classGrade;
+
     private String topic;
 
     private String description;
+
+    private String homework;
 
     private Set<LessonFileDto> files;
 }

@@ -7,6 +7,7 @@ import kindgeek.school.klassno.entity.dto.TeacherDto;
 import kindgeek.school.klassno.entity.dto.criteria.LessonCriteria;
 import kindgeek.school.klassno.entity.dto.criteria.TeacherCriteria;
 import kindgeek.school.klassno.entity.request.TeacherRequest;
+import kindgeek.school.klassno.enums.UserRole;
 import kindgeek.school.klassno.exception.NotFoundException;
 import kindgeek.school.klassno.mapper.TeacherMapper;
 import kindgeek.school.klassno.repository.TeacherRepository;
@@ -17,6 +18,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
@@ -27,9 +29,13 @@ public class TeacherServiceImpl implements TeacherService {
 
     private final TeacherMapper teacherMapper;
 
+    private final PasswordEncoder passwordEncoder;
+
     @Override
     public void create(TeacherRequest teacherRequest) {
         Teacher teacher = teacherMapper.toEntity(teacherRequest);
+        teacher.setRole(UserRole.TEACHER);
+        teacher.setPassword(passwordEncoder.encode(teacherRequest.getPassword()));
         teacherRepository.save(teacher);
     }
 
@@ -52,10 +58,11 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
-    public void edit (Long id, TeacherRequest teacherRequest){
+    public Long edit (Long id, TeacherRequest teacherRequest){
         Teacher teacher = findById(id);
         teacherMapper.update(teacher, teacherRequest);
         teacherRepository.save(teacher);
+        return teacher.getId();
     }
 
     @Override

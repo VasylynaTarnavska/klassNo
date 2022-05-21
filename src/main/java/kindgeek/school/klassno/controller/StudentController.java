@@ -1,19 +1,18 @@
 package kindgeek.school.klassno.controller;
-import kindgeek.school.klassno.entity.Student;
 import kindgeek.school.klassno.entity.dto.StudentDto;
 import kindgeek.school.klassno.entity.request.StudentRequest;
 import kindgeek.school.klassno.service.StudentService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.data.web.SortDefault;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/student")
@@ -22,26 +21,38 @@ public class StudentController {
     private  final StudentService studentService;
 
     @PostMapping
-    public void save(@RequestBody StudentRequest studentRequest){
-        studentService.create(studentRequest);
+    @PreAuthorize("hasAuthority('TEACHER')")
+    public Long save(@RequestBody StudentRequest studentRequest){
+        log.info("Creating new student");
+        return studentService.create(studentRequest);
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('TEACHER', 'STUDENT')")
     public StudentDto findDtoById(@PathVariable Long id){
+        log.info("Getting student by id: {}", id);
         return studentService.findDtoById(id);
     }
 
     @DeleteMapping("/delete/{id}")
-    public void delete (@PathVariable Long id){studentService.delete(id);}
+    @PreAuthorize("hasAuthority('TEACHER')")
+    public void delete (@PathVariable Long id){
+        log.info("Deleting student by id: {}", id);
+        studentService.delete(id);}
 
     @PutMapping("/edit/{id}")
-    public void edit (@PathVariable Long id, @RequestBody StudentRequest studentRequest){
+    @PreAuthorize("hasAuthority('STUDENT')")
+    public Long edit (@PathVariable Long id, @RequestBody StudentRequest studentRequest){
+        log.info("Editing student by id: {}", id);
         studentService.edit(id, studentRequest);
+        return id;
     }
 
     @GetMapping("/by-class/{classRoomId}")
+    @PreAuthorize("hasAuthority('TEACHER')")
     public Page<StudentDto> findByClassRoomId(@PathVariable Long classRoomId,
                                               @SortDefault(sort = "lastName", direction = Sort.Direction.ASC) Pageable page){
+        log.info("Getting students by criteria");
         return studentService.findByClassRoomId(classRoomId, page);
     }
 }

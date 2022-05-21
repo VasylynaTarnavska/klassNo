@@ -27,6 +27,8 @@ public class ClassRoom {
     @Enumerated(EnumType.STRING)
     private Grade grade;
 
+    private String className;
+
     @OneToMany(mappedBy = "classRoom")
     private List<Student> students;
 

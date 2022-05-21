@@ -17,4 +17,7 @@ public class ClassRoomDto {
 
     @NotBlank
     private String grade;
+
+    @NotBlank
+    private String className;
 }

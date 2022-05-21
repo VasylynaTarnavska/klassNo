@@ -20,6 +20,7 @@ public interface LessonMapper {
     @Mapping(target = "teacher", source = "teacherId")
     void update(@MappingTarget Lesson lesson, LessonRequest lessonRequest);
 
+    @Mapping(target = "classGrade", source = "classRoom.className")
     LessonDto toDto(Lesson lesson);
 
     default Lesson fromId(Long id){

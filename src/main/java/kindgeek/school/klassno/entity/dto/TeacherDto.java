@@ -17,4 +17,6 @@ public class TeacherDto {
 
     private String avatar;
 
+    private String email;
+
 }

@@ -9,7 +9,6 @@ import javax.validation.constraints.NotNull;
 @Setter
 public class AttendanceRequest {
 
-    @NotNull
     private Boolean isPresent = false;
 
     private String homeWork;

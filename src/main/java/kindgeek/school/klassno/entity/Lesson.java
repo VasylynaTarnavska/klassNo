@@ -8,6 +8,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -37,9 +38,11 @@ public class Lesson {
 
     private String description;
 
+    private String homework;
+
     @OneToMany(mappedBy = "lesson")
     private List<Attendance> attendances;
 
     @OneToMany(mappedBy = "lesson")
-    private Set<LessonFile> files;
+    private Set<LessonFile> files = new HashSet<>();
 }
