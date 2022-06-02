@@ -1,7 +1,6 @@
 package kindgeek.school.klassno.mapper;
 
 import kindgeek.school.klassno.entity.Award;
-import kindgeek.school.klassno.entity.ClassRoom;
 import kindgeek.school.klassno.entity.dto.AwardDto;
 import kindgeek.school.klassno.entity.request.AwardRequest;
 import org.mapstruct.Mapper;

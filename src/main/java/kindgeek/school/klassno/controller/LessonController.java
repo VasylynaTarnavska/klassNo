@@ -42,6 +42,7 @@ public class LessonController {
     @PreAuthorize("hasAuthority('TEACHER')")
     public Long create(@ModelAttribute LessonRequest lessonRequest) {
         log.info("Creating new lesson");
+        log.info("Creating new lesson");
         return lessonService.create(lessonRequest);
     }
 

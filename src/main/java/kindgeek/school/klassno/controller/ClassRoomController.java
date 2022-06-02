@@ -1,6 +1,5 @@
 package kindgeek.school.klassno.controller;
 
-import kindgeek.school.klassno.entity.dto.AwardDto;
 import kindgeek.school.klassno.entity.dto.ClassRoomDto;
 import kindgeek.school.klassno.entity.request.ClassRoomRequest;
 import kindgeek.school.klassno.enums.Grade;
@@ -24,6 +23,7 @@ public class ClassRoomController {
     @PostMapping
     @PreAuthorize("hasAuthority('TEACHER')")
     public Long save(@RequestBody ClassRoomRequest classRoomRequest){
+        log.info("Creating new class room");
         log.info("Creating new class room");
         return classRoomService.create(classRoomRequest);
     }

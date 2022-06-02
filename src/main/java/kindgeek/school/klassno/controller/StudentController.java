@@ -24,6 +24,7 @@ public class StudentController {
     @PreAuthorize("hasAuthority('TEACHER')")
     public Long save(@RequestBody StudentRequest studentRequest){
         log.info("Creating new student");
+        log.info("Creating new student");
         return studentService.create(studentRequest);
     }
 

@@ -51,6 +51,7 @@ public class TeacherController {
     @PreAuthorize("hasAuthority('TEACHER')")
     public Long edit(@PathVariable Long id, @RequestBody TeacherRequest teacherRequest) {
         log.info("Editing teacher by id: {}", id);
+        log.info("Editing teacher by id: {}", id);
         return teacherService.edit(id, teacherRequest);
     }
 

@@ -1,6 +1,5 @@
 package kindgeek.school.klassno.service;
 
-import kindgeek.school.klassno.entity.Award;
 import kindgeek.school.klassno.entity.dto.AwardDto;
 import kindgeek.school.klassno.entity.request.AwardRequest;
 
