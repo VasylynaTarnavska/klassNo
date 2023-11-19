@@ -1,6 +1,7 @@
 package kindgeek.school.klassno.service;
 
 import kindgeek.school.klassno.entity.Student;
+import kindgeek.school.klassno.entity.dto.StudentMarksDto;
 import kindgeek.school.klassno.entity.dto.StudentDto;
 import kindgeek.school.klassno.entity.request.StudentRequest;
 import org.springframework.data.domain.Page;
@@ -22,5 +23,7 @@ public interface StudentService {
 
     Page<StudentDto> findByClassRoomId(Long classRoomId, Pageable page);
 
-    List<Student> findStudentByClassRoomId(Long classRoomId);
+    List<Student> findByClassRoomId(Long classRoomId);
+
+    List<StudentMarksDto> getScorecards(Long classId, Long subjectId);
 }

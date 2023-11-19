@@ -12,7 +12,7 @@ public class TeacherRequest {
 
     @Email
     @NotBlank
-    private String email;
+    private String login;
 
     private String lessonLink;
 

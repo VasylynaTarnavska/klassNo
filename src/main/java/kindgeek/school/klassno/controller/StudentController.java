@@ -1,4 +1,5 @@
 package kindgeek.school.klassno.controller;
+import kindgeek.school.klassno.entity.dto.StudentMarksDto;
 import kindgeek.school.klassno.entity.dto.StudentDto;
 import kindgeek.school.klassno.entity.request.StudentRequest;
 import kindgeek.school.klassno.service.StudentService;
@@ -10,6 +11,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.SortDefault;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @Slf4j
@@ -23,7 +26,6 @@ public class StudentController {
     @PostMapping
     @PreAuthorize("hasAuthority('TEACHER')")
     public Long save(@RequestBody StudentRequest studentRequest){
-        log.info("Creating new student");
         log.info("Creating new student");
         return studentService.create(studentRequest);
     }
@@ -55,5 +57,12 @@ public class StudentController {
                                               @SortDefault(sort = "lastName", direction = Sort.Direction.ASC) Pageable page){
         log.info("Getting students by criteria");
         return studentService.findByClassRoomId(classRoomId, page);
+    }
+
+    @GetMapping("/scorecards/{classId}/{subjectId}")
+    @PreAuthorize("hasAuthority('TEACHER')")
+    public List<StudentMarksDto> findScorecards (@PathVariable Long classId, @PathVariable Long subjectId ){
+        log.info("Getting scorecards by class id: {} and subject id: {}", classId, subjectId);
+        return studentService.getScorecards(classId, subjectId);
     }
 }

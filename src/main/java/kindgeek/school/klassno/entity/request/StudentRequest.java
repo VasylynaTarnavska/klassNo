@@ -10,10 +10,6 @@ import javax.validation.constraints.NotBlank;
 @Setter
 public class StudentRequest {
 
-    @Email
-    @NotBlank
-    private String email;
-
     @NotBlank
     private String password;
 

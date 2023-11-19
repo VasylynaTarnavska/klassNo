@@ -18,5 +18,5 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
 
     @Query("select st from Student st " +
             "where st.classRoom.id = :classRoomId")
-    List<Student> findStudentByClassRoomId (Long classRoomId);
+    List<Student> findByClassRoomId(Long classRoomId);
 }

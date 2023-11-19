@@ -4,17 +4,15 @@ import kindgeek.school.klassno.enums.UserRole;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.management.relation.Role;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 
 @Getter
 @Setter
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class User {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +21,7 @@ public abstract class User {
     private String password;
 
     @Email
-    private String email;
+    private String login;
 
     @NotBlank
     private String firstName;
