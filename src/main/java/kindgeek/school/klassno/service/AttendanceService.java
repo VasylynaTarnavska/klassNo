@@ -21,4 +21,7 @@ public interface AttendanceService {
     List<AttendanceDto> findByLessonId(Long id);
 
     void delete(Long id);
+    Byte getMarkByStudentIdAndLessonId(Long studentId, Long lessonId);
+
+    Attendance getByStudentIdAndQuizzId(Long studentId, Long quizzId);
 }

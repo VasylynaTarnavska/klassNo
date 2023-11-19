@@ -21,11 +21,8 @@ import java.util.stream.Collectors;
 public class AttendanceServiceImpl implements AttendanceService {
 
     private final StudentService studentService;
-
     private final LessonService lessonService;
-
     private final AttendanceRepository attendanceRepository;
-
     private final AttendanceMapper attendanceMapper;
 
     public AttendanceServiceImpl(StudentService studentService,
@@ -47,7 +44,7 @@ public class AttendanceServiceImpl implements AttendanceService {
 
     @Override
     public void createFromLesson(Lesson lesson) {
-        List<Attendance> attendances = studentService.findStudentByClassRoomId(lesson.getClassRoom().getId())
+        List<Attendance> attendances = studentService.findByClassRoomId(lesson.getClassRoom().getId())
                 .stream().map(student -> createAttendance(lesson, student))
                 .collect(Collectors.toList());
         attendanceRepository.saveAll(attendances);
@@ -93,21 +90,15 @@ public class AttendanceServiceImpl implements AttendanceService {
         attendanceRepository.deleteById(id);
     }
 
-
-    private Attendance createFromRequest(AttendanceRequest attendanceRequest) {
-        Attendance attendance = new Attendance();
-        attendance.setIsPresent(attendanceRequest.getIsPresent());
-        attendance.setHomeWork(attendanceRequest.getHomeWork());
-        attendance.setStudent(studentService.findById(attendanceRequest.getStudentId()));
-        attendance.setLesson(lessonService.findById(attendanceRequest.getLessonId()));
-        return attendance;
+    @Override
+    public Byte getMarkByStudentIdAndLessonId(Long studentId, Long lessonId) {
+        return attendanceRepository.findMarkByStudentIdAndLessonId(studentId, lessonId);
     }
 
-    private AttendanceDto toDto(Attendance attendance) {
-        AttendanceDto attendanceDto = new AttendanceDto();
-        attendanceDto.setIsPresent(attendance.getIsPresent());
-        attendanceDto.setHomeWork(attendance.getHomeWork());
-        return attendanceDto;
+    @Override
+    public Attendance getByStudentIdAndQuizzId(Long studentId, Long quizzId) {
+        return attendanceRepository.findByStudentIdAndQuizzId(studentId, quizzId)
+                .orElseThrow(() -> new NotFoundException("Attendance not found"));
     }
 }
 
