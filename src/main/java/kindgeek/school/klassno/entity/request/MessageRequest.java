@@ -14,8 +14,6 @@ public class MessageRequest {
     @NotBlank
     private String messageText;
 
-    private LocalDate messageTime;
-
     @NotNull
     private Long senderId;
 
