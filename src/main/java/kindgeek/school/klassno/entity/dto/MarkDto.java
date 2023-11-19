@@ -11,5 +11,7 @@ public class MarkDto {
 
     private String level;
 
+    private Byte value;
+
     private String comment;
 }

@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -20,6 +22,10 @@ public class Mark {
 
     @Enumerated(EnumType.STRING)
     private Level level;
+
+    @Min(1)
+    @Max(12)
+    private Byte value;
 
     private String comment;
 

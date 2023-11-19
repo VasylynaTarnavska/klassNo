@@ -23,7 +23,6 @@ public class LessonSpecification implements Specification<Lesson> {
 
         List<Predicate> predicates = new ArrayList<>();
 
-        //if(!StringUtils.isBlank(firstName)
         if(lessonCriteria.getClassRoomId()!= null){
             predicates.add(criteriaBuilder.equal(root.join("classRoom").get("id"), lessonCriteria.getClassRoomId()));
         }

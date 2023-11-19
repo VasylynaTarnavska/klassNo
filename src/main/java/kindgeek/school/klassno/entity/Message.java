@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -21,7 +22,7 @@ public class Message {
     @NotBlank
     private String messageText;
 
-    private LocalDate messageTime = LocalDate.now();
+    private LocalDateTime messageTime;
 
     @ManyToOne
     @NotNull

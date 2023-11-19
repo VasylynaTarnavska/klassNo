@@ -1,5 +1,6 @@
 package kindgeek.school.klassno.entity.dto;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,16 +8,12 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-public class MessageDto {
+@Builder
+public class LessonShortDto {
 
     private Long id;
 
-    private String messageText;
+    private LocalDateTime lessonTime;
 
-    private LocalDateTime messageTime;
-
-    private Long senderId;
-
-    private ChatDto chat;
-
+    private String topic;
 }
