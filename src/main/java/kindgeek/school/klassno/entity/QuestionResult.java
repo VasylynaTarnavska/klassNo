@@ -19,6 +19,7 @@ public class QuestionResult {
 
     private Boolean isCorrect;
 
+    @ManyToOne
     private Answer selectedAnswer;
 
     @ManyToOne

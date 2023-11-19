@@ -61,7 +61,7 @@ public class QuizzServiceImpl implements QuizzService {
     @Override
     public QuizzFullDto getDtoById(Long id) {
         Quizz quizz = getById(id);
-        return mapper.toDto(quizz);
+        return mapper.toFullDto(quizz);
     }
 
     @Override
@@ -123,7 +123,25 @@ public class QuizzServiceImpl implements QuizzService {
 
     @Override
     public QuizzResultFullDto getQuizzResultForStudentById(Long studentId, Long quizzId) {
-        return null;
+        Quizz quizz = getById(quizzId);
+        QuizzResult studentResult = quizz.getQuizzResults().stream()
+                .filter(quizzResult -> Objects.equals(studentId, quizzResult.getAttendance().getStudent().getId()))
+                .findFirst()
+                .orElse(null);
+        if (Objects.isNull(studentResult)){
+            return null;
+        }
+        studentResult.getQuizz().getQuestions().forEach(question -> evaluateStudentQuestionResult(question, studentId));
+        return quizzResultMapper.toFullDto(studentResult);
+    }
+
+    private void evaluateStudentQuestionResult (Question question, Long studentId) {
+        QuestionResult studentResult = question.getResults().stream()
+                .filter(result -> Objects
+                        .equals(studentId, result.getQuizzResult().getAttendance().getStudent().getId()))
+                .findFirst()
+                .orElse(null);
+        question.setStudentResult(studentResult);
     }
 
     private QuestionResult createQuestionResult(QuestionPassRequest request, QuizzResult result) {

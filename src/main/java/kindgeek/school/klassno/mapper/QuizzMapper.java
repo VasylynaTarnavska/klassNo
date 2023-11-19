@@ -7,6 +7,7 @@ import kindgeek.school.klassno.entity.dto.QuizzStudentListDto;
 import kindgeek.school.klassno.entity.dto.QuizzTeacherListDto;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 
 import java.math.BigDecimal;
@@ -16,7 +17,8 @@ import java.util.Objects;
 @Mapper(componentModel = "spring", uses = {QuestionMapper.class, LessonMapper.class})
 public interface QuizzMapper {
 
-    QuizzFullDto toDto(Quizz quizz);
+    @Mapping(target = "questions", qualifiedByName = "toQuestionDto")
+    QuizzFullDto toFullDto(Quizz quizz);
 
     QuizzTeacherListDto toQuizzTeacherListDto(Quizz quizz);
 

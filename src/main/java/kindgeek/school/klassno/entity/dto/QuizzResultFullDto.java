@@ -18,5 +18,7 @@ public class QuizzResultFullDto {
 
     private BigDecimal result;
 
+    private String name;
+
     private List<QuestionFullDto> questions;
 }

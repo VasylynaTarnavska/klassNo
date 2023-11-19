@@ -25,4 +25,10 @@ public class Question {
     @OneToMany(mappedBy = "question")
     @Cascade(org.hibernate.annotations.CascadeType.MERGE)
     private List<Answer> answers;
+
+    @OneToMany(mappedBy = "question")
+    private List<QuestionResult> results;
+
+    @Transient
+    private QuestionResult studentResult;
 }
