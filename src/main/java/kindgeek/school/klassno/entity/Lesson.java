@@ -40,6 +40,9 @@ public class Lesson {
 
     private String homework;
 
+    @OneToOne(mappedBy = "lesson")
+    private Quizz quizz;
+
     @OneToMany(mappedBy = "lesson")
     private List<Attendance> attendances;
 

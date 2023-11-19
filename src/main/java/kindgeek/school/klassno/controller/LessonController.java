@@ -1,6 +1,7 @@
 package kindgeek.school.klassno.controller;
 
 import kindgeek.school.klassno.entity.dto.LessonDto;
+import kindgeek.school.klassno.entity.dto.LessonShortDto;
 import kindgeek.school.klassno.entity.dto.criteria.LessonCriteria;
 import kindgeek.school.klassno.entity.request.LessonRequest;
 import kindgeek.school.klassno.service.LessonFilesStorageService;
@@ -19,6 +20,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
 import java.util.Set;
 
 @Slf4j
@@ -35,7 +37,7 @@ public class LessonController {
     @PreAuthorize("hasAnyAuthority('TEACHER', 'STUDENT')")
     private LessonDto findById(@PathVariable Long id) {
         log.info("Getting lesson by id: {}", id);
-        return lessonService.findDtoById(id);
+        return lessonService.getDtoById(id);
     }
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
@@ -70,10 +72,9 @@ public class LessonController {
 
     @GetMapping("/find/{studentId}")
     @PreAuthorize("hasAnyAuthority('TEACHER', 'STUDENT')")
-    public Page<LessonDto> findLessonByStudentId(@PathVariable Long studentId,
-                                                 @SortDefault(sort = "lessonTime", direction = Sort.Direction.ASC) Pageable page) {
+    public List<LessonDto> findLessonByStudentId(@PathVariable Long studentId){
         log.info("Getting lessons by studentId");
-        return lessonService.findLessonByStudentId(studentId, page);
+        return lessonService.getByStudentId(studentId);
     }
 
     @PostMapping("/{id}/add/files")
@@ -91,5 +92,12 @@ public class LessonController {
         Resource file = lessonFilesStorageService.loadFileById(id);
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename =\"" + file.getFilename() + "\"").body(file);
+    }
+
+    @GetMapping("/short/{classId}/{subjectId}")
+    @PreAuthorize("hasAuthority('TEACHER')")
+    public List<LessonShortDto> findShortInfo(@PathVariable Long classId, @PathVariable Long subjectId) {
+        log.info("Getting shortInfo by class id: {} and subject id: {}", classId, subjectId);
+        return lessonService.getShortInfo(classId, subjectId);
     }
 }

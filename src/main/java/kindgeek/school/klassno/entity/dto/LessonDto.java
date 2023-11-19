@@ -1,6 +1,5 @@
 package kindgeek.school.klassno.entity.dto;
 
-import kindgeek.school.klassno.entity.LessonFile;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,6 +16,8 @@ public class LessonDto {
 
     private String classGrade;
 
+    private String subjectName;
+
     private String topic;
 
     private String description;
@@ -24,4 +25,6 @@ public class LessonDto {
     private String homework;
 
     private Set<LessonFileDto> files;
+
+    private Byte mark;
 }
