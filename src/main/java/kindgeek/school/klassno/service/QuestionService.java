@@ -8,4 +8,6 @@ public interface QuestionService {
     Question create(QuestionRequest questionRequest);
 
     Question getById(Long id);
+
+    void delete(Question question);
 }

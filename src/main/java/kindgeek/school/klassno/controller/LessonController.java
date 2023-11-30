@@ -70,9 +70,17 @@ public class LessonController {
         return lessonService.find(lessonCriteria, page);
     }
 
+    @GetMapping("/without-quiz")
+    @PreAuthorize("hasAnyAuthority('TEACHER')")
+    public List<LessonDto> getByTeacherIdWithoutQuiz(Long teacherId) {
+        log.info("Getting lessons by teacher id without quizz");
+        return lessonService.getByTeacherIdWithoutQuiz(teacherId);
+    }
+
+
     @GetMapping("/find/{studentId}")
     @PreAuthorize("hasAnyAuthority('TEACHER', 'STUDENT')")
-    public List<LessonDto> findLessonByStudentId(@PathVariable Long studentId){
+    public List<LessonDto> findLessonByStudentId(@PathVariable Long studentId) {
         log.info("Getting lessons by studentId");
         return lessonService.getByStudentId(studentId);
     }

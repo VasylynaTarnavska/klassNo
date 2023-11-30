@@ -6,9 +6,9 @@
     <meta charset="utf-8">
     <meta name="keywords" content="">
     <meta name="description" content="">
-    <title>Student list</title>
+    <title>Quizzes</title>
     <link rel="stylesheet" href="nicepage.css" media="screen">
-    <link rel="stylesheet" href="Student-list.css" media="screen">
+    <link rel="stylesheet" href="Teacher-quizzes.css" media="screen">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script class="u-script" type="text/javascript" src="jquery.js" defer=""></script>
     <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script>
@@ -24,7 +24,7 @@
         "logo": "images/KlassNo.svg"
     }</script>
     <meta name="theme-color" content="#478ac9">
-    <meta property="og:title" content="Student list">
+    <meta property="og:title" content="Quizzes">
     <meta property="og:type" content="website">
 </head>
 
@@ -70,7 +70,7 @@
                     </li>
                     <li class="u-nav-item"><a
                             class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
-                            href="Teacher-quizzes.html"
+                            href="#"
                             style="padding: 10px 20px;">Тестування</a>
                     </li>
                     <li class="u-nav-item"><a
@@ -103,12 +103,12 @@
                             <li class="u-nav-item"><a class="u-button-style u-nav-link" href="Student-list.html">Мої
                                 учні</a>
                             </li>
-                            <li class="u-nav-item"><a class="u-button-style u-nav-link" href="Teacher-quizzes.html">Тестування</a>
-                            </li>
-                            <li class="u-nav-item"><a class="u-button-style u-nav-link" href="Журнал.html">Журнал</a>
+                            <li class="u-nav-item"><a class="u-button-style u-nav-link" href="#">Тестування</a>
                             </li>
                             <li class="u-nav-item"><a class="u-button-style u-nav-link" href="New-quiz.html">Створити
                                 тест</a>
+                            </li>
+                            <li class="u-nav-item"><a class="u-button-style u-nav-link" href="Журнал.html">Журнал</a>
                             </li>
                             <li class="u-nav-item"><a class="u-button-style u-nav-link" href="Головна.html">Вихід</a>
                             </li>
@@ -120,146 +120,116 @@
         </nav>
     </div>
 </header>
-<section class="u-clearfix u-image u-section-1" id="sec-7c71" data-image-width="1980" data-image-height="1114">
+
+<section class="u-clearfix u-image u-section-1" id="sec-0183" data-image-width="1980" data-image-height="1114">
     <div class="u-clearfix u-sheet u-sheet-1">
-        <div class="u-align-justify u-container-style u-group u-radius-11 u-shape-round u-white u-group-1">
+        <div class="u-align-left u-container-style u-group u-radius-11 u-shape-round u-white u-group-1">
             <div class="u-container-layout u-container-layout-1">
-
-                <h3 class="u-text u-text-default u-text-1"> Мої класи </h3>
-
-                <form id="new-class">
-                    <div id="create-new-class">
-
-                        <div class="form-item-1">
-                            <label id="class-creator" for="grade">
-                                Вибери клас
-                            </label>
-                            <select name="grade" id="grade">
-                            </select>
-                        </div>
-
-                        <div class="form-item-1">
-                            <label for="class-name">Ім'я класу</label>
-                            <input type="text" name="class-name" id="class-name"/>
-                        </div>
-                        <a id="new-class-submit"
-                           class="u-border-none u-btn u-btn-round u-button-style u-hover-palette-3-light-1 u-palette-3-base u-radius-10 u-btn-1">
-                            Створити новий клас</a>
-                    </div>
-                </form>
-
-                <div id="class-table" class="u-expanded-width u-table u-table-responsive u-table-1">
-                    <table id="class-table" class="class-table">
+                <div class="styled-table u-expanded-width u-table u-table-responsive u-table-1">
+                    <span class='text'> Мої тестування  </span>
+                    <table id="quizzes-table">
                         <thead class="u-palette-1-light-2 u-table-header u-table-header-1">
-                        <tr style="height: 46px;">
-                            <th class="u-border-1 u-border-palette-1-base u-table-cell u-table-cell-1">Клас</th>
-                            <th class="u-border-1 u-border-palette-1-base u-table-cell u-table-cell-2">Ім'я класу</th>
-                            <!-- <th class="u-border-1 u-border-palette-1-base u-table-cell u-table-cell-3">Кількість учнів</th> -->
+                        <tr style="height: 30px;">
+                            <th class="u-border-1 u-border-palette-1-base u-table-cell u-table-cell-1">Назва
+                            </th>
+                            <th class="u-border-1 u-border-palette-1-base u-table-cell u-table-cell-2">Урок</th>
+                            <th class="u-border-1 u-border-palette-1-base u-table-cell u-table-cell-3">Питань
+                            </th>
+                            <th class="u-border-1 u-border-palette-1-base u-table-cell u-table-cell-4">
+                                Виконано
+                            </th>
+                            <th class="u-border-1 u-border-palette-1-base u-table-cell u-table-cell-5">
+                                Результат
+                            </th>
                         </tr>
                         </thead>
-                        <tbody id="lesson-table-body">
-
+                        <tbody id="test-table-body">
                         </tbody>
                     </table>
                 </div>
 
+
             </div>
         </div>
-        <div class="u-container-style u-group u-preserve-proportions u-radius-15 u-shape-round u-white u-group-2">
-
+        <div class="u-align-left u-container-style u-group u-radius-11 u-shape-round u-white u-group-2">
             <div class="u-container-layout u-container-layout-2">
-
-                <div class="tabs">
+                <div class="tabs-1">
                     <!-- Кнопка-переключатель и название первого таба -->
-                    <input type="radio" name="tabs" id="tab-first" checked>
-                    <label for="tab-first">
-                        <p>Учні класу
+                    <input type="radio" name="tabs-1" id="tab-third" checked>
+                    <label for="tab-third">
+                        <p>Запитання
                         </p>
                     </label>
                     <!-- Кнопка-переключатель и название второго таба -->
-                    <input type="radio" name="tabs" id="tab-second">
-                    <label for="tab-second">
-                        <!-- <span class="u-file-icon u-icon u-icon-circle u-palette-1-base u-text-white u-icon-3">
-                          <img src="images/9.png" alt="">
-                        </span> -->
-                        <p>Додати нового учня</p>
+                    <input type="radio" name="tabs-1" id="tab-fourth">
+                    <label for="tab-fourth">
+                        <p>Результати </p>
                     </label>
                     <!-- Вывод контента наших табов -->
-                    <div id="tab-content-1" class="tab-content">
-
-                        <div class="form-item-1">
-                            <label id="class-creator" for="class-selector">
-                                Вибери клас
-                            </label>
-                            <select name="class-selector" id="class-selector">
-                            </select>
+                    <div id="tab-content-3" class="tab-content">
+                        <div id="quiz-info" class="flex-container">
+                            <div class="flex-item">
+                                <h1 id="quiz-name">Назва тестування</h1>
+                            </div>
+                            <div class="flex-item">
+                                <p id="num-questions">Запитань: <span id="num-questions-value">0</span></p>
+                            </div>
+                            <div class="flex-item">
+                                <p id="num-students">Учасників: <span id="num-students-value">0</span></p>
+                            </div>
+                            <div class="flex-item">
+                                <p id="quiz-result">Результат: <span id="quiz-result-value">0</span></p>
+                            </div>
                         </div>
-                        <a id="student-list-submit"
-                           class="u-border-none u-btn u-btn-round u-button-style u-hover-palette-3-light-1 u-palette-3-base u-radius-10 u-btn-1">
-                            Показати учнів класу</a>
+
+                        <div id="questions-container">
+                            <ul id="questions-list"></ul>
+                        </div>
+
+                    </div>   <!-- #tab-content-3 -->
+
+                    <div id="tab-content-4" class="tab-content">
+                        <!-- <label for="cars">Choose a car:</label> -->
+                        <div id="quiz-info" class="flex-container">
+                            <div class="flex-item">
+                                <h1 id="quiz-name-1">Назва тестування</h1>
+                            </div>
+                            <div class="flex-item">
+                                <p id="num-questions">Запитань: <span id="num-questions-value-1">0</span></p>
+                            </div>
+                            <div class="flex-item">
+                                <p id="num-students">Учасників: <span id="num-students-value-1">0</span></p>
+                            </div>
+                            <div class="flex-item">
+                                <p id="quiz-result">Результат: <span id="quiz-result-value-1">0</span></p>
+                            </div>
+                        </div>
 
                         <div class="u-expanded-width u-table u-table-responsive u-table-1">
-                            <table id="student-table">
+                            <table id="results-table">
                                 <thead class="u-palette-1-light-2 u-table-header u-table-header-1">
                                 <tr style="height: 30px;">
-                                    <th class="u-border-1 u-border-palette-1-base u-table-cell u-table-cell-1">
-                                        Прізвище
+                                    <th class="u-border-1 u-border-palette-1-base u-table-cell u-table-cell-1">Учень
                                     </th>
-                                    <th class="u-border-1 u-border-palette-1-base u-table-cell u-table-cell-2">ім'я</th>
-                                    <th class="u-border-1 u-border-palette-1-base u-table-cell u-table-cell-3">логін
+                                    <th class="u-border-1 u-border-palette-1-base u-table-cell u-table-cell-3">
+                                        Правильно
+                                    </th>
+                                    <th class="u-border-1 u-border-palette-1-base u-table-cell u-table-cell-4">
+                                        Результат
                                     </th>
                                 </tr>
                                 </thead>
-                                <tbody id="student-table-body">
+                                <tbody>
                                 </tbody>
                             </table>
                         </div>
-                    </div>   <!-- #tab-content-1 -->
+                    </div> <!-- #tab-content-4-->
 
-                    <div id="tab-content-2" class="tab-content">
-                        <!-- <label for="cars">Choose a car:</label> -->
-                        <div id="lesson-details">
-
-                            <div class="form-item-1">
-                                <label id="student-creator" for="classRoom">
-                                    Вибери клас
-                                </label>
-                                <select name="classRoom" id="classRoom">
-                                </select>
-                            </div>
-
-                            <div class="form-item-1">
-                                <label id="student-creator" for="lastName">Прізвище</label>
-                                <input type="text" name="lastName" id="lastName"/>
-                            </div>
-
-                            <div class="form-item-1">
-                                <label id="student-creator" for="firstName">Ім'я </label>
-                                <input type="text" name="firstName" id="firstName"/>
-                            </div>
-
-                            <div class="form-item-1">
-                                <label id="student-creator" for="password">Пароль </label>
-                                <input type="text" name="password" id="password"/>
-                            </div>
-
-
-                            <div>
-                                <a id="create-student-submit"
-                                   class="u-border-none u-btn u-btn-round u-button-style u-hover-palette-3-light-1 u-palette-3-base u-radius-10 u-btn-1">
-                                    Зареєструвати учня</a>
-                            </div>
-
-
-                        </div>
-                    </div>
-
-                </div> <!-- #tab-content-2 -->
-
+                </div>
             </div>
         </div>
     </div>
-    </div>
+
 </section>
 
 
@@ -268,7 +238,7 @@
         <p class="u-small-text u-text u-text-variant u-text-1">Created by Vasylyna Tarnavska</p>
     </div>
 </footer>
-<script src="Student-list.js"></script>
+<script src="Teacher-quizzes.js"></script>
 </body>
 
 </html>

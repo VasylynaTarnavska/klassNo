@@ -1,3 +1,34 @@
+/* Add this CSS to your stylesheet or in a style tag in your HTML file */
+
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-size: 16px;
+}
+
+.styled-table th, .styled-table td {
+  border: 1px solid #dddddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.styled-table th {
+  background-color:#adcce9;
+  font-weight: 600;
+}
+
+.styled-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.styled-table tbody tr:hover {
+  background-color: #e6e6e6;
+  cursor: pointer;
+}
+
+/* Optional: Add styles for the header or any other specific elements */
+
 .form-item-1 {
   margin-left: 30px;
   margin-right: 30px;

@@ -21,6 +21,7 @@ import javax.transaction.Transactional;
 import java.time.temporal.ChronoUnit;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -82,6 +83,14 @@ public class LessonServiceImpl implements LessonService {
         LessonSpecification lessonSpecification = new LessonSpecification(lessonCriteria);
         Page<Lesson> lessons = lessonRepository.findAll(lessonSpecification, page);
         return lessons.map(lessonMapper::toDto);
+    }
+
+    @Override
+    public List<LessonDto> getByTeacherIdWithoutQuiz(Long teacherId) {
+        return lessonRepository.findByTeacherId(teacherId).stream()
+                .filter(lesson -> Objects.isNull(lesson.getQuizz()))
+                .map(lessonMapper::toDto)
+                .collect(Collectors.toList());
     }
 
     @Override

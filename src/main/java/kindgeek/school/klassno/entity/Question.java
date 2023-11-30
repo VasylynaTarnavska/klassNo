@@ -22,8 +22,7 @@ public class Question {
     @ManyToOne
     private Quizz quizz;
 
-    @OneToMany(mappedBy = "question")
-    @Cascade(org.hibernate.annotations.CascadeType.MERGE)
+    @OneToMany(mappedBy = "question", cascade = {CascadeType.MERGE, CascadeType.REMOVE}, orphanRemoval = true)
     private List<Answer> answers;
 
     @OneToMany(mappedBy = "question")

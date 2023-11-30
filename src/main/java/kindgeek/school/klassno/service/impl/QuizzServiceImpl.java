@@ -51,6 +51,14 @@ public class QuizzServiceImpl implements QuizzService {
     }
 
     @Override
+    public void delete(Long id) {
+        Quizz quizz = getById(id);
+        quizz.getLesson().setQuizz(null);
+        quizz.getQuestions().clear();
+        repository.delete(quizz);
+    }
+
+    @Override
     public void addQuestion(QuestionRequest questionRequest) {
         Quizz quizz = getById(questionRequest.getQuizzId());
         quizz.getQuestions().add(questionService.create(questionRequest));
@@ -62,6 +70,11 @@ public class QuizzServiceImpl implements QuizzService {
     public QuizzFullDto getDtoById(Long id) {
         Quizz quizz = getById(id);
         return mapper.toFullDto(quizz);
+    }
+
+    @Override
+    public List<QuestionDto> getQuestionsByQuizzId(Long quizzId) {
+        return getDtoById(quizzId).getQuestions();
     }
 
     @Override
@@ -128,14 +141,14 @@ public class QuizzServiceImpl implements QuizzService {
                 .filter(quizzResult -> Objects.equals(studentId, quizzResult.getAttendance().getStudent().getId()))
                 .findFirst()
                 .orElse(null);
-        if (Objects.isNull(studentResult)){
+        if (Objects.isNull(studentResult)) {
             return null;
         }
         studentResult.getQuizz().getQuestions().forEach(question -> evaluateStudentQuestionResult(question, studentId));
         return quizzResultMapper.toFullDto(studentResult);
     }
 
-    private void evaluateStudentQuestionResult (Question question, Long studentId) {
+    private void evaluateStudentQuestionResult(Question question, Long studentId) {
         QuestionResult studentResult = question.getResults().stream()
                 .filter(result -> Objects
                         .equals(studentId, result.getQuizzResult().getAttendance().getStudent().getId()))

@@ -1,0 +1,180 @@
+.text {
+    font-size: 20px;
+    margin: 10px;
+}
+
+.form-item-1 {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-top: 10px;
+}
+
+.main-form {
+    display: block;
+    float: left;
+    width: 22%;
+    color: black;
+    font-size: 20px;
+    font-weight: normal;
+    text-decoration: none;
+    text-align: center;
+    line-height: 2;
+    cursor: pointer;
+    box-shadow: inset 0 4px #ccc;
+    border-bottom: 2px solid #ccc;
+    transition: all 0.5s;
+}
+
+.question-form {
+    width: 100%;
+}
+
+.quiz-name {
+    width: 22%;
+    border-bottom: 2px solid #ccc;
+}
+
+.u-section-1 .u-btn-1 {
+    border-style: none;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background-image: none;
+    cursor: pointer;
+}
+
+#button-container {
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+}
+
+#button{
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+}
+
+.option-item {
+    width: 50%;
+}
+
+.radio-label {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    margin-bottom: 10px;
+    box-shadow: none;
+    border-bottom: none;
+    transition: none;
+    font-size: 20px
+}
+
+.styled-radio {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 25px;
+    height: 25px;
+    border: 2px solid #3498db;
+    border-radius: 50%;
+    outline: none;
+    transition: 0.2s;
+    cursor: pointer;
+    display: flex;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.styled-radio:checked {
+    background-color: #3498db;
+    border: 2px solid #3498db;
+}
+
+.options-row{
+    display: flex;
+}
+
+.textarea {
+    font-size: 20px;
+}
+
+select {
+    width: 22%;
+    padding: 4px;
+    border-radius: 4px;
+    box-shadow: 2px 2px 8px #ccc;
+    background: #ffffff;
+    border: none;
+    outline: none;
+    display: inline-block;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    cursor: pointer;
+}
+
+.u-section-1 {
+    background-image: url("images/jh-7.jpg");
+    background-position: 50% 50%;
+}
+
+.u-section-1 .u-sheet-1 {
+    min-height: 686px;
+}
+
+.u-section-1 .u-group-1 {
+    width: 1220px;
+    min-height: 600px;
+    height: auto;
+    margin: 42px auto 42px -38px;
+}
+
+.u-section-1 .u-container-layout-1 {
+    padding: 23px 0 0;
+}
+
+@media (max-width: 1199px) {
+    .u-section-1 .u-sheet-1 {
+        min-height: 566px;
+    }
+
+    .u-section-1 .u-group-1 {
+        width: 940px;
+        margin-left: 0;
+        height: auto;
+    }
+}
+
+@media (max-width: 991px) {
+    .u-section-1 .u-sheet-1 {
+        min-height: 434px;
+    }
+
+    .u-section-1 .u-group-1 {
+        width: 720px;
+    }
+}
+
+@media (max-width: 767px) {
+    .u-section-1 .u-sheet-1 {
+        min-height: 326px;
+    }
+
+    .u-section-1 .u-group-1 {
+        width: 540px;
+    }
+}
+
+@media (max-width: 575px) {
+    .u-section-1 .u-sheet-1 {
+        min-height: 205px;
+    }
+
+    .u-section-1 .u-group-1 {
+        width: 340px;
+    }
+}
+

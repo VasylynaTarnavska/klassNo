@@ -25,4 +25,10 @@ public class QuestionServiceImpl implements QuestionService {
     public Question getById(Long id) {
         return repository.findById(id).orElseThrow(() -> new NotFoundException("Question by id " + id + " not found"));
     }
+
+    @Override
+    public void delete(Question question) {
+        repository.delete(question);
+
+    }
 }

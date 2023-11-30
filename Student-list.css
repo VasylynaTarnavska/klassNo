@@ -425,7 +425,7 @@ select, #lessonTime{
   cursor: pointer;
   }
 
-  #class-table tr:hover{
+  #class-table tbody tr:hover{
     cursor: pointer;
     background-color: #ccc;
   }

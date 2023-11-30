@@ -25,6 +25,8 @@ public interface LessonService {
 
     Page<LessonDto> find(LessonCriteria lessonCriteria, Pageable page);
 
+    List<LessonDto> getByTeacherIdWithoutQuiz(Long teacherId);
+
     List<LessonDto> getByStudentId(Long studentId);
 
     List<LessonShortDto> getShortInfo(Long classId, Long subjectId);

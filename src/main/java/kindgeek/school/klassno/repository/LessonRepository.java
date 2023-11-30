@@ -1,7 +1,6 @@
 package kindgeek.school.klassno.repository;
 
 import kindgeek.school.klassno.entity.Lesson;
-import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
@@ -28,4 +27,11 @@ public interface LessonRepository extends JpaRepository<Lesson, Long>, JpaSpecif
               and s.id = :subjectId
             order by lesson.lesson_time desc""", nativeQuery = true)
     List<Lesson> findByClassIdAndSubjectId(Long classId, Long subjectId);
+
+    @Query(value = """
+            select lesson.*
+            from lesson
+            left join teacher on lesson.teacher_id=teacher.id
+            where teacher.id  = :teacherId """,  nativeQuery = true)
+    List<Lesson> findByTeacherId(Long teacherId);
 }

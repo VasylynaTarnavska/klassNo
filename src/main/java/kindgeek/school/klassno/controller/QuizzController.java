@@ -28,6 +28,13 @@ public class QuizzController {
         return quizzService.createForLesson(request);
     }
 
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('TEACHER')")
+    public void delete (@PathVariable Long id) {
+        log.info("Deleting  quizz with id: {}", id);
+        quizzService.delete(id);
+    }
+
     @PostMapping("/add-question")
     @PreAuthorize("hasAnyAuthority('TEACHER')")
     public void addQuestion(@RequestBody @Valid QuestionRequest request) {
@@ -38,8 +45,15 @@ public class QuizzController {
     @GetMapping("/{id}")
     @PreAuthorize("hasAnyAuthority('TEACHER', 'STUDENT')")
     public QuizzFullDto getById(@PathVariable Long id) {
-        log.info("Get quizz by id: {}", id);
+        log.info("Getting quizz by id: {}", id);
         return quizzService.getDtoById(id);
+    }
+
+    @GetMapping("questions/{quizzId}")
+    @PreAuthorize("hasAnyAuthority('TEACHER', 'STUDENT')")
+    public List<QuestionDto> getQuestionsByQuizzId(@PathVariable Long quizzId){
+        log.info("Getting questions by id: {}", quizzId);
+        return quizzService.getQuestionsByQuizzId(quizzId);
     }
 
     @PostMapping("/pass")

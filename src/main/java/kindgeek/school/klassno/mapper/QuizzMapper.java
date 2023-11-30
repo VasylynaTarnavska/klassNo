@@ -9,6 +9,7 @@ import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
+import org.springframework.util.CollectionUtils;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -39,11 +40,18 @@ public interface QuizzMapper {
     default void afterToQuizzTeacherListDto(@MappingTarget QuizzTeacherListDto dto, Quizz quizz) {
         dto.setNumberOfStudentInClass(quizz.getLesson().getClassRoom().getStudents().size());
         dto.setNumberOfResults(quizz.getQuizzResults().size());
-        dto.setResult(quizz.getQuizzResults().stream()
+        dto.setResult(evaluateResult(quizz));
+    }
+
+    private BigDecimal evaluateResult(Quizz quizz) {
+        if (CollectionUtils.isEmpty(quizz.getQuizzResults())) {
+            return BigDecimal.ZERO;
+        }
+        return quizz.getQuizzResults().stream()
                 .map(QuizzResult::getResult)
                 .reduce(BigDecimal.ZERO, BigDecimal::add)
                 .divide(BigDecimal.valueOf(quizz.getQuizzResults().size()))
-                .setScale(0, RoundingMode.HALF_UP));
+                .setScale(0, RoundingMode.HALF_UP);
     }
 
     @AfterMapping

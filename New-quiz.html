@@ -5,12 +5,12 @@
     <meta charset="utf-8">
     <meta name="keywords" content="">
     <meta name="description" content="">
-    <title>Журнал</title>
+    <title>Сторити тест</title>
     <link rel="stylesheet" href="nicepage.css" media="screen">
-    <link rel="stylesheet" href="Журнал.css" media="screen">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="New-quiz.css">
     <script class="u-script" type="text/javascript" src="jquery.js" defer=""></script>
     <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <meta name="generator" content="Nicepage 4.11.3, nicepage.com">
     <link id="u-theme-google-font" rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
@@ -23,7 +23,7 @@
         "logo": "images/KlassNo.svg"
     }</script>
     <meta name="theme-color" content="#478ac9">
-    <meta property="og:title" content="Журнал">
+    <meta property="og:title" content="Сторити тест">
     <meta property="og:type" content="website">
 </head>
 <body class="u-body u-xl-mode">
@@ -61,22 +61,25 @@
                     </li>
                     <li class="u-nav-item"><a
                             class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
-                            href="Student-list.html" style="padding: 10px 20px;">Мої учні</a>
+                            href="Student-list.html"
+                            style="padding: 10px 20px;">Мої учні</a>
                     </li>
                     <li class="u-nav-item"><a
                             class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
-                            href="Teacher-quizzes.html" style="padding: 10px 20px;">Тестування</a>
+                            href="Teacher-quizzes.html"
+                            style="padding: 10px 20px;">Тестування</a>
                     </li>
                     <li class="u-nav-item"><a
                             class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
-                            href="New-quiz.html"
+                            href="#"
                             style="padding: 10px 20px;">Створити тест</a>
                     </li>
                     <li class="u-nav-item"><a
                             class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
-                            href="Журнал.html" style="padding: 10px 20px;">Журнал</a>
+                            href="Журнал.html"
+                            style="padding: 10px 20px;">Журнал</a>
                     </li>
-                    <li class="u-nav-item"><a
+                    <li class="u-nav-item" id="exit"><a
                             class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
                             href="Головна.html" style="padding: 10px 20px;">Вихід</a>
                     </li>
@@ -89,20 +92,21 @@
                         <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2">
                             <li class="u-nav-item"><a class="u-button-style u-nav-link" href="Головна.html">Головна</a>
                             </li>
-                            <li class="u-nav-item"><a class="u-button-style u-nav-link" href="Teacher-profile.html">Мій
-                                профіль</a>
+                            <li class="u-nav-item"><a
+                                    class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
+                                    href="Teacher-profile.html" style="padding: 10px 20px;">Мій профіль</a>
                             </li>
                             <li class="u-nav-item"><a class="u-button-style u-nav-link" href="Student-list.html">Мої
                                 учні</a>
                             </li>
                             <li class="u-nav-item"><a class="u-button-style u-nav-link" href="Teacher-quizzes.html">Тестування</a>
                             </li>
-                            <li class="u-nav-item"><a class="u-button-style u-nav-link" href="New-quiz.html">Створити
+                            <li class="u-nav-item"><a class="u-button-style u-nav-link" href="#">Створити
                                 тест</a>
                             </li>
                             <li class="u-nav-item"><a class="u-button-style u-nav-link" href="Журнал.html">Журнал</a>
                             </li>
-                            <li class="u-nav-item" id="exit"><a class="u-button-style u-nav-link" href="Головна.html">Вихід</a>
+                            <li class="u-nav-item"><a class="u-button-style u-nav-link" href="Головна.html">Вихід</a>
                             </li>
                         </ul>
                     </div>
@@ -113,54 +117,40 @@
     </div>
 </header>
 <section class="u-clearfix u-image u-section-1" id="sec-0183" data-image-width="1980" data-image-height="1114">
-    <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
+    <div class="u-clearfix u-sheet u-sheet-1">
         <div class="u-align-left u-container-style u-group u-radius-11 u-shape-round u-white u-group-1">
             <div class="u-container-layout u-container-layout-1">
-                <!-- Box 1 -->
-                <form id="new-class">
-                    <div id="create-new-class">
+                <div id="new-quiz">
 
-                        <div class="form-item-1">
-                            <label id="class-selector" for="class-room">
-                                Оберіть клас
-                            </label>
-                            <select name="class-room" id="class-room">
-                            </select>
+                    <div class="form-item-1">
+                        <label id="quiz-creator" class="main-form" for="quizName">Назва</label>
+                        <input type="text" name="quizName" id="quizName" class="quiz-name"/>
+                        <label id="quiz-creator" class="main-form" for="lesson">
+                            Вибери урок
+                        </label>
+                        <select name="lesson" id="lesson">
+                        </select>
+                    </div>
+
+                    <div id="button-container">
+                        <div>
+                            <a id="create-quizz-submit"
+                               class="u-border-none u-btn u-btn-round u-button-style u-hover-palette-3-light-1 u-palette-3-base u-radius-10 u-btn-1">
+                                Створити</a>
                         </div>
 
-                        <div class="form-item-1">
-                            <label id="subject-selector" for="subject">
-                                Оберіть предмет
-                            </label>
-                            <select name="subject" id="subject">
-                            </select>
-                        </div>
-                        <a id="show-marks"
-                           class="u-border-none u-btn u-btn-round u-button-style u-hover-palette-3-light-1 u-palette-3-base u-radius-10 u-btn-1">
-                            Показати оцінки</a>
                     </div>
-                </form>
 
+                    <div id="question-container">
 
-            </div>
-        </div>
-        <div class="u-align-left u-container-style u-group u-radius-11 u-shape-round u-white u-group-2">
-            <div class="u-container-layout u-container-layout-2">
-                <div class="form-item-1">
-
-                    <div class="u-expanded-width u-table u-table-responsive u-table-1">
-                        <table id="scorecard-table" class="styled-table">
-                            <thead class="u-palette-1-light-2 u-table-header u-table-header-1">
-
-                            </thead>
-                            <tbody id="scorecard-table-body">
-                            </tbody>
-                        </table>
                     </div>
+
+                    <div id="final-container">
+
+                    </div>
+
 
                 </div>
-                <!-- Box 1 -->
-
             </div>
         </div>
     </div>
@@ -172,6 +162,7 @@
         <p class="u-small-text u-text u-text-variant u-text-1">Created by Vasylyna Tarnavska</p>
     </div>
 </footer>
-<script src="Журнал.js"></script>
+<script src="New-quiz.js"></script>
+
 </body>
 </html>
