@@ -315,6 +315,16 @@ select {
     border-radius: 8px;
 }
 
+#quiz-details-info{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 800px;
+    margin: 10px auto;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+}
+
 .flex-item {
     flex: 1;
     text-align: center;
@@ -324,9 +334,57 @@ select {
     color: #333;
 }
 
+#quiz-details-info h1 {
+    color: #333;
+}
+
 #quiz-info p {
     margin: 10px 0;
     color: #666;
     font-size: 1rem;
+}
+
+#quiz-details-info p {
+    margin: 10px 0;
+    color: #666;
+    font-size: 1rem;
+}
+
+#results-table tbody tr:hover {
+    cursor: pointer;
+    background-color: #eee;
+}
+
+/*#resultModal {*/
+/*    text-align: center;*/
+/*}*/
+
+#resultModal .modal-dialog {
+    max-width: 800px;
+}
+
+#resultModal .modal-content {
+    padding: 20px;
+}
+
+
+.result-container {
+    display: none;
+    margin-top: 20px;
+}
+
+#results-list {
+    list-style-type: none;
+    padding: 0;
+    font-size: 20px;
+}
+
+#results-list li {
+    margin-bottom: 5px;
+}
+
+.wrong-answer {
+    font-weight: bold;
+    background-color: orangered;
 }
 

@@ -26,9 +26,11 @@ public interface QuizzService {
 
     List<QuizzTeacherListDto> getListForTeacher();
 
-    List<QuizzStudentListDto> getListForStudent(Long studentId);
+    List<QuizzStudentListDto> getListForStudentToPass(Long studentId);
+    List<QuizzStudentListDto> getListForStudentPassed(Long studentId);
 
     List<QuizzResultDto> getQuizzResultsById(Long quizzId);
 
     QuizzResultFullDto getQuizzResultForStudentById(Long studentId, Long quizzId);
+    QuizzResultFullDto getQuizzResultFullById(Long quizzResultId);
 }

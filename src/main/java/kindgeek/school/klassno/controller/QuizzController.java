@@ -70,11 +70,18 @@ public class QuizzController {
         return quizzService.getListForTeacher();
     }
 
-    @GetMapping("/list/for-student/{studentId}")
+    @GetMapping("/list/for-student/{studentId}/to-pass")
     @PreAuthorize("hasAnyAuthority('STUDENT', 'TEACHER')")
-    public List<QuizzStudentListDto> getListForStudent(@PathVariable Long studentId) {
-        log.info("Getting quizzes list for student: {}", studentId);
-        return quizzService.getListForStudent(studentId);
+    public List<QuizzStudentListDto> getListForStudentToPass(@PathVariable Long studentId) {
+        log.info("Getting quizzes for student: {} to pass", studentId);
+        return quizzService.getListForStudentToPass(studentId);
+    }
+
+    @GetMapping("/list/for-student/{studentId}/passed")
+    @PreAuthorize("hasAnyAuthority('STUDENT', 'TEACHER')")
+    public List<QuizzStudentListDto> getListForStudentPassed(@PathVariable Long studentId) {
+        log.info("Getting passed quizzes student: {}", studentId);
+        return quizzService.getListForStudentPassed(studentId);
     }
 
     @GetMapping("/result/{quizzId}")
@@ -89,6 +96,13 @@ public class QuizzController {
     public QuizzResultFullDto getQuizzResultForStudentById(@PathVariable Long quizzId, @PathVariable Long studentId) {
         log.info("Getting quizz result for student: {} by quizz id: {}", studentId, quizzId);
         return quizzService.getQuizzResultForStudentById(studentId, quizzId);
+    }
+
+    @GetMapping("/full-result/{quizzResultId}")
+    @PreAuthorize("hasAnyAuthority('TEACHER', 'STUDENT')")
+    public QuizzResultFullDto getQuizzResultFullById(@PathVariable Long quizzResultId) {
+        log.info("Getting quizz result  by  id: {}", quizzResultId);
+        return quizzService.getQuizzResultFullById(quizzResultId);
     }
 
 

@@ -45,7 +45,7 @@ public class LessonFilesStorageServiceImpl implements LessonFilesStorageService 
                 Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
                 LessonFile lessonFile = new LessonFile();
                 lessonFile.setLesson(lesson);
-                lessonFile.setUrl(path.toAbsolutePath().toString());
+                lessonFile.setUrl(path.toString());
                 lessonFile.setName(file.getOriginalFilename());
                 lesson.getFiles().add(lessonFile);
             }

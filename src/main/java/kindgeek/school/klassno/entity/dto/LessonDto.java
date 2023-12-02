@@ -27,4 +27,6 @@ public class LessonDto {
     private Set<LessonFileDto> files;
 
     private Byte mark;
+
+    private String lessonLink;
 }

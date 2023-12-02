@@ -17,6 +17,7 @@ import kindgeek.school.klassno.service.QuestionService;
 import kindgeek.school.klassno.service.QuizzService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -82,6 +83,7 @@ public class QuizzServiceImpl implements QuizzService {
         return repository.findById(id).orElseThrow(() -> new NotFoundException("Quizz with id:" + id + "not found"));
     }
 
+    @Transactional
     @Override
     public void pass(QuizzPassRequest passRequest) {
         Quizz quizz = getById(passRequest.getQuizzId());
@@ -101,13 +103,16 @@ public class QuizzServiceImpl implements QuizzService {
                 .filter(QuestionResult::getIsCorrect)
                 .toList();
         quizzResult.setCorrectAnswersAmount(correctResults.size());
-        quizzResult.setResult(BigDecimal.valueOf(quizzResult.getCorrectAnswersAmount())
-                .multiply(BigDecimal.valueOf(100))
-                .divide(BigDecimal.valueOf(quizz.getNumberOfQuestions()))
-                .stripTrailingZeros()
-                .setScale(0, RoundingMode.HALF_UP));
-
+        quizzResult.setResult(evaluateResult(quizz, quizzResult));
         quizzResultRepository.save(quizzResult);
+    }
+
+    private BigDecimal evaluateResult(Quizz quizz, QuizzResult quizzResult) {
+        return BigDecimal.valueOf(quizzResult.getCorrectAnswersAmount())
+                .multiply(BigDecimal.valueOf(100))
+                .divide(BigDecimal.valueOf(quizz.getNumberOfQuestions()), RoundingMode.HALF_UP)
+                .stripTrailingZeros()
+                .setScale(0, RoundingMode.HALF_UP);
     }
 
     @Override
@@ -119,10 +124,16 @@ public class QuizzServiceImpl implements QuizzService {
     }
 
     @Override
-    public List<QuizzStudentListDto> getListForStudent(Long studentId) {
-        List<Quizz> quizzes = repository.findByStudentId(studentId);
-        return quizzes.stream()
-                .map(quizz -> mapper.toQuizzStudentListDto(quizz, studentId))
+    public List<QuizzStudentListDto> getListForStudentToPass(Long studentId) {
+        return getDtos(studentId).stream()
+                .filter(quizz -> Objects.isNull(quizz.getResult()))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<QuizzStudentListDto> getListForStudentPassed(Long studentId) {
+        return getDtos(studentId).stream()
+                .filter(quizz -> Objects.nonNull(quizz.getResult()))
                 .collect(Collectors.toList());
     }
 
@@ -144,6 +155,14 @@ public class QuizzServiceImpl implements QuizzService {
         if (Objects.isNull(studentResult)) {
             return null;
         }
+        studentResult.getQuizz().getQuestions().forEach(question -> evaluateStudentQuestionResult(question, studentId));
+        return quizzResultMapper.toFullDto(studentResult);
+    }
+
+    @Override
+    public QuizzResultFullDto getQuizzResultFullById(Long quizzResultId) {
+        QuizzResult studentResult = quizzResultRepository.getById(quizzResultId);
+        Long studentId = studentResult.getAttendance().getStudent().getId();
         studentResult.getQuizz().getQuestions().forEach(question -> evaluateStudentQuestionResult(question, studentId));
         return quizzResultMapper.toFullDto(studentResult);
     }
@@ -172,6 +191,13 @@ public class QuizzServiceImpl implements QuizzService {
                 .isCorrect(isCorrect)
                 .quizzResult(result)
                 .build();
+    }
+
+    private List<QuizzStudentListDto> getDtos(Long studentId) {
+        List<Quizz> quizzes = repository.findByStudentId(studentId);
+        return quizzes.stream()
+                .map(quizz -> mapper.toQuizzStudentListDto(quizz, studentId))
+                .collect(Collectors.toList());
     }
 }
 

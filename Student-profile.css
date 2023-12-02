@@ -409,3 +409,39 @@ select, #lessonTime{
   cursor: pointer;
   }
 
+#lesson-table tbody tr:hover {
+  cursor: pointer;
+  background-color: #eee;
+}
+
+#lesson-info {
+  display: none;
+  margin-top: 10px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+#lesson-files {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 10px;
+}
+
+#lesson-files li {
+  margin-bottom: 5px;
+}
+
+a {
+  color: #3498db;
+}
+
+#lesson-info p {
+  margin: 5px 0;
+  font-weight: 500;
+}
+
+#files-info{
+  display: flex;
+}

@@ -105,7 +105,9 @@ function buildResultTable(data) {
     data.forEach(result => {
         $("#results-table").find('tbody')
             .append($('<tr>')
-
+                .on("click", function () {
+                    getResultModal(result);
+                })
                 .append($('<th>')
                     .append($('<p>')
                         .text(result.student.lastName + " " + result.student.firstName)
@@ -170,178 +172,61 @@ function displayQuestions(questions) {
     });
 }
 
-$("#create-quizz-submit").click(function () {
-    var quizzInfo = {
-        name: $("#quizName").val(),
-        lessonId: $("#lesson option:selected").val()
-    }
-    console.log(quizzInfo);
-    $.ajax({
-        url: "http://localhost:8080/quizz",
-        type: 'POST',
+function getResultModal(resultDetails) {
+    $.get({
+        url: "http://localhost:8080/quizz/full-result/" + resultDetails.id,
         headers: headers,
-        contentType: 'application/json',
-        dataType: 'json',
-        data: JSON.stringify(quizzInfo),
-
-        success: function (data) {
-            let quiz = document.querySelector("#new-quiz");
-            quiz.dataset.quizId = data;
-            console.log("New quiz id = " + quiz.dataset.quizId);
-            displayButton();
-
-        },
-        error: function (error) {
-            console.error('Error creating quiz:', error);
-        }
-    });
-
-});
-
-
-function displayButton() {
-    $("#button-container").empty();
-
-    var editButton = $("<button>Редагувати</button>").click(function () {
-        // Handle edit button click
-        console.log("Edit button clicked");
-    });
-    editButton.addClass("u-border-none u-btn u-btn-round u-button-style u-hover-palette-3-light-1 u-palette-3-base u-radius-10 u-btn-1")
-
-    var deleteButton = $("<button>Видалити</button>").click(function () {
-        deleteQuiz();
-        console.log("Delete button clicked");
-    });
-    deleteButton.addClass("u-border-none u-btn u-btn-round u-button-style u-hover-palette-3-light-1 u-palette-3-base u-radius-10 u-btn-1")
-
-    var addQuestionButton = $("<button>+ питання</button>").click(function () {
-        var questionForm = createQuestionForm();
-        $("#question-container").empty();
-        $("#question-container").append(questionForm);
-        var finalButton = createFinalButton();
-        $("#final-container").append(finalButton);
-        console.log("Add Question button clicked");
-    });
-    addQuestionButton.addClass("u-border-none u-btn u-btn-round u-button-style u-hover-palette-3-light-1 u-palette-3-base u-radius-10 u-btn-1")
-
-    $("#button-container").append(editButton, deleteButton, addQuestionButton);
-}
-
-function deleteQuiz() {
-    let quiz = document.querySelector("#new-quiz");
-    var quizId = quiz.dataset.quizId;
-
-    $.ajax({
-        url: "http://localhost:8080/quizz/" + quizId,
-        type: 'DELETE',
-        headers: headers,
-        success: function () {
-            console.log("Delete quizz");
-            window.location.reload();
-        },
-        error: function (error) {
-            console.error('Error deleting quizz:', error);
-        }
+    }).done(function (data) {
+        console.log(data);
+        buildModalContent(data);
     });
 }
 
-function createQuestionForm() {
-    var questionForm = $("<div class='question-form'>");
-    questionForm.append("<br> <textarea rows='1' cols='64' name='questionText' placeholder='Введіть запитання'></textarea><br>")
-    questionForm.append("<span> Вкажіть варіанти відповідей і позначте правильний:  </span></div>")
+function buildModalContent(result) {
+    // Create modal structure dynamically
 
-    for (var i = 0; i < 4; i++) {
-        var optionForm = $("<div class='option-form option-item'>");
-        var label = $("<label class='radio-label'" +
-            " style=' display: flex;\n" +
-            "    align-items: center;\n" +
-            "    margin-bottom: 10px;\n" +
-            "    box-shadow: none;\n" +
-            "    border-bottom: none;\n" +
-            "    transition: none;" +
-            "   font-size: 16px'>");
-        label.append("<input type='radio' name='correctOption' class='styled-radio'" +
-            " style=' appearance: none;\n" +
-            "    -webkit-appearance: none;\n" +
-            "    -moz-appearance: none;\n" +
-            "    width: 16px;\n" +
-            "    height: 16px;\n" +
-            "    border: 2px solid #3498db;\n" +
-            "    border-radius: 50%;\n" +
-            "    outline: none;\n" +
-            "    transition: 0.2s;\n" +
-            "    cursor: pointer;\n" +
-            "    display: flex;" +
-            "    margin-right: 10px;" +
-            "    margin-left: 10px;'>");
-        label.append("<textarea rows='1' cols='30' name='answerOption' class='answer-option' placeholder='Варіант відповіді'></textarea>");
-        optionForm.append(label);
-        questionForm.append(optionForm);
-    }
-
-    return questionForm;
+    updateQuizDetailsInfo(result);
+    buildResultList(result);
+    // Display the modal
+    $('#resultModal').modal('show');
 }
 
-function createFinalButton() {
-    var finalButtons = $("<div id='button'><button class='save-question form-buttons u-border-none u-btn u-btn-round u-button-style u-hover-palette-3-light-1 u-palette-3-base u-radius-10 u-btn-1'>" +
-        "Зберегти</button>");
-    finalButtons.append(" <button class='add-question u-border-none u-btn u-btn-round u-button-style u-hover-palette-3-light-1 u-palette-3-base u-radius-10 u-btn-1'>" +
-        "+ питання</button>")
-
-    var final = $("<button>Завершити</button>").click(function () {
-        window.location.reload();
-    });
-    final.addClass("u-border-none u-btn u-btn-round u-button-style u-hover-palette-3-light-1 u-palette-3-base u-radius-10 u-btn-1")
-    finalButtons.append(final);
-
-    return finalButtons;
+function updateQuizDetailsInfo(element) {
+    $("#quiz-details-name").text(element.name);
+    $("#num-details-questions-value").text(element.numberOfQuestions);
+    $("#num-details-corrects-value").text(element.correctAnswersAmount);
+    $("#quiz-details-result-value").text(element.result + "%");
 }
 
-$("#final-container").on("click", ".save-question", function () {
-    let quiz = document.querySelector("#new-quiz");
-    var quizId = quiz.dataset.quizId;
-    var questionText = $("textarea[name='questionText']").val();
+function buildResultList(result) {
+    const questionsList = $("#results-list");
+    questionsList.empty();
 
-    // Collect answers
-    var answers = [];
+    result.questions.forEach((question, questionIndex) => {
+        const listItem = $("<li>");
+        listItem.append("<p><strong>Запитання " + (questionIndex + 1) + ":</strong> " + question.questionText + "</p>");
 
-    $(".question-form").find(".option-form").each(function () {
-        var answerOption = $("textarea[name='answerOption']").val();
-        var isCorrect = $("input[name='correctOption']").prop("checked").val();
-        answers.push({ answerOption: answerOption, isCorrect: isCorrect });
+        const optionsList = $("<ul class='options-list'>");
+        question.answers.forEach((option, index) => {
+            const optionItem = $("<li>");
+            optionItem.text(option.answerOption);
+
+            if (option.isCorrect) {
+                optionItem.addClass("correct-answer");
+            }
+
+            if (!option.isCorrect && (question.questionResult.selectedAnswer.id === option.id)) {
+                optionItem.addClass("wrong-answer");
+            }
+
+            optionsList.append(optionItem);
+        });
+
+        listItem.append(optionsList);
+        questionsList.append(listItem);
     });
-
-    console.log('Question Text:', questionText);
-    console.log('Answers:', answers);
-
-    var questionData = {
-        quizzId: quizId,
-        questionText: questionText,
-        answers: answers
-    };
-
-    console.log(questionData)
-
-    // Send data to the server
-    $.ajax({
-        url: "http://localhost:8080/quizz/add-question",
-        method: 'POST',
-        headers: headers,
-        contentType: 'application/json',
-        data: JSON.stringify(questionData),
-        success: function (response) {
-            console.log('Data sent successfully:', response);
-        },
-        error: function (error) {
-            console.error('Error sending data:', error);
-        }
-    });
-});
-
-$("#final-container").on("click", ".add-question", function () {
-    var questionForm = createQuestionForm();
-    $(".question-form").after(questionForm);
-});
+    $(".question-container").fadeIn();
+}
 
 
 $("#exit").click(function () {

@@ -35,7 +35,7 @@ public class LessonController {
 
     @GetMapping("/{id}")
     @PreAuthorize("hasAnyAuthority('TEACHER', 'STUDENT')")
-    private LessonDto findById(@PathVariable Long id) {
+    public LessonDto findById(@PathVariable Long id) {
         log.info("Getting lesson by id: {}", id);
         return lessonService.getDtoById(id);
     }
@@ -43,7 +43,6 @@ public class LessonController {
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @PreAuthorize("hasAuthority('TEACHER')")
     public Long create(@ModelAttribute LessonRequest lessonRequest) {
-        log.info("Creating new lesson");
         log.info("Creating new lesson");
         return lessonService.create(lessonRequest);
     }

@@ -25,6 +25,9 @@ window.onload = function () {
             var date = new Date(element.lessonTime);
             $("#lesson-table").find('tbody')
                 .append($('<tr>')
+                    .on("click", function () {
+                        redirectOnZoom(element);
+                    })
                     .append($('<th>')
                         .append($('<p>')
                             .text(date.toLocaleTimeString() + " " + date.toLocaleDateString())
@@ -56,7 +59,6 @@ window.onload = function () {
 }
 
 $("#update-submit").click(function () {
-    console.log("Test");
 
     var updateInfo = {
         login: $("#email").val(),
@@ -81,6 +83,44 @@ $("#update-submit").click(function () {
     });
 });
 
+
+function redirectOnZoom(element){
+    window.open(element.lessonLink);
+}
+
+$("#view-lesson").on("click", function () {
+    var selectedLessonId = $("#lesson").val();
+    var student = JSON.parse(localStorage.getItem("studentInfo"));
+
+    // Make an AJAX request to get lesson details
+    $.ajax({
+        url: "http://localhost:8080/lesson/" + selectedLessonId,
+        headers: {
+            Authorization: 'Bearer ' + student.token
+        },
+        method: "GET",
+        success: function (lessonDetails) {
+            // Update the HTML with the lesson details
+            $("#lesson-topic").text("Тема уроку: " + lessonDetails.topic);
+            $("#lesson-description").text("Деталі уроку: " + lessonDetails.description);
+            $("#lesson-homework").text("Домашнє завдання: " + lessonDetails.homework);
+            $("#files-topic").text("Файли уроку: ");
+
+            // Clear and populate the list of files
+            var filesList = $("#lesson-files");
+            filesList.empty();
+            lessonDetails.files.forEach(function (file) {
+                filesList.append("<li><a href='" + file.url + "' target='_blank'>" + file.name + "</a></li>");
+            });
+
+            // Display the lesson info div with a fade-in effect
+            $("#lesson-info").fadeIn();
+        },
+        error: function (error) {
+            console.error("Error getting lesson details:", error);
+        }
+    });
+});
 
 $("#exit").click(function () {
     localStorage.removeItem("studentInfo"),

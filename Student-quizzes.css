@@ -1,0 +1,285 @@
+
+.u-section-1 .u-btn-1 {
+    width: 30%;
+    border-style: none;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background-image: none;
+    cursor: pointer;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.u-section-1 {
+    background-image: url("images/jh-7.jpg");
+    background-position: 50% 50%;
+}
+
+.u-section-1 .u-sheet-1 {
+    min-height: 686px;
+}
+
+.u-section-1 .u-group-1 {
+    width: 1220px;
+    min-height: 600px;
+    height: auto;
+    margin: 42px auto 42px -38px;
+}
+
+.u-section-1 .u-container-layout-1 {
+    padding: 23px 0 0;
+}
+
+@media (max-width: 1199px) {
+    .u-section-1 .u-sheet-1 {
+        min-height: 566px;
+    }
+
+    .u-section-1 .u-group-1 {
+        width: 940px;
+        margin-left: 0;
+        height: auto;
+    }
+}
+
+@media (max-width: 991px) {
+    .u-section-1 .u-sheet-1 {
+        min-height: 434px;
+    }
+
+    .u-section-1 .u-group-1 {
+        width: 720px;
+    }
+}
+
+@media (max-width: 767px) {
+    .u-section-1 .u-sheet-1 {
+        min-height: 326px;
+    }
+
+    .u-section-1 .u-group-1 {
+        width: 540px;
+    }
+}
+
+@media (max-width: 575px) {
+    .u-section-1 .u-sheet-1 {
+        min-height: 205px;
+    }
+
+    .u-section-1 .u-group-1 {
+        width: 340px;
+    }
+}
+
+
+.tabs {
+    max-width: 100%;
+    float: none;
+    list-style: none;
+    padding: 0;
+    margin: 10px auto;
+    /* border-bottom: 2px solid #ccc; */
+}
+
+.tabs:after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+.tab-radio {
+    display: none;
+}
+
+.tabs label p {
+    padding: 1px;
+    margin-right: 0;
+}
+
+.tabs label {
+    display: block;
+    float: left;
+    width: 50%;
+    color: black;
+    font-size: 24px;
+    font-weight: normal;
+    text-decoration: none;
+    text-align: center;
+    line-height: 2;
+    cursor: pointer;
+    box-shadow: inset 0 4px #ccc;
+    border-bottom: 2px solid #ccc;
+    transition: all 0.5s;
+}
+
+.tabs label span {
+    display: none;
+}
+
+.tabs label:hover {
+    color: #3498db;
+    box-shadow: inset 0 4px #3498db;
+    border-bottom: 4px solid #3498db;
+}
+
+.tab-content {
+    display: none;
+    width: 100%;
+    float: left;
+    padding: 15px;
+    box-sizing: border-box;
+    background-color: #ffffff;
+}
+
+.tabs [id^="tab"]:checked + label {
+    background: #FFF;
+    box-shadow: inset 0 4px #3498db;
+    border-bottom: 4px solid #3498db;
+    color: #3498db;
+}
+
+#tab-first:checked ~ #tab-content-1,
+#tab-second:checked ~ #tab-content-2 {
+    display: block;
+}
+
+#quiz-to-pass-selector {
+    font-size: 20px;
+    width: 30%;
+}
+
+select {
+    width: 30%;
+    height: 45px;
+    padding: 4px;
+    border-radius: 4px;
+    box-shadow: 2px 2px 8px #ccc;
+    background: #ffffff;
+    border: none;
+    outline: none;
+    display: inline-block;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    cursor: pointer;
+}
+
+#quiz-selector {
+    display: flex;
+    justify-content: space-between;
+}
+
+#button-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+#save-button {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.question-container {
+    display: none;
+    margin-top: 20px;
+}
+
+.result-container {
+    display: none;
+    margin-top: 20px;
+}
+
+.question {
+    margin-bottom: 10px;
+}
+
+.answer {
+    margin-left: 20px;
+}
+
+.selected-answer {
+    font-weight: bold;
+    background-color: #d4ebfc;
+}
+
+#questions-list {
+    list-style-type: none;
+    padding: 0;
+    font-size: 20px;
+}
+
+#results-list {
+    list-style-type: none;
+    padding: 0;
+    font-size: 20px;
+}
+
+ul ul {
+    list-style-type: none;
+}
+
+#questions-list li {
+    margin-bottom: 5px;
+}
+
+#results-list li {
+    margin-bottom: 5px;
+}
+
+.options-list {
+    display: flex;
+    flex-wrap: wrap; /* Allow options to wrap to the next line if they don't fit */
+    justify-content: space-around;
+}
+
+.options-list li {
+    flex: 0 0 20%; /* Adjust the width of each option based on your preference */
+    text-align: center;
+    border: 2px solid #ccc;
+    padding: 5px;
+    cursor: pointer;
+}
+
+
+#quiz-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 10px auto;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+}
+
+.flex-item {
+    flex: 1;
+    text-align: center;
+}
+
+#quiz-info h1 {
+    color: #333;
+}
+
+#quiz-info p {
+    margin: 10px 0;
+    color: #666;
+    font-size: 1.5rem;
+}
+
+h1:not(.u-title) {
+    font-weight: 400;
+    font-size: 1.7rem;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+.correct-answer {
+    font-weight: bold;
+    background-color: greenyellow;
+}
+
+.wrong-answer {
+    font-weight: bold;
+    background-color: orangered;
+}

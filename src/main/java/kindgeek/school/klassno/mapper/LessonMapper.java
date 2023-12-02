@@ -24,6 +24,7 @@ public interface LessonMapper {
 
     @Mapping(target = "classGrade", source = "classRoom.className")
     @Mapping(target = "subjectName", source = "subject.subjectName")
+    @Mapping(target = "lessonLink", source = "teacher.lessonLink")
     @Mapping(target = "mark", ignore = true)
     LessonDto toDto(Lesson lesson);
 
